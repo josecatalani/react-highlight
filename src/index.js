@@ -1,27 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import './styles.css';
 
-export default class HelloWorld extends React.Component {
-	constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-  	const {title} = this.props;
-    return (
-      <h1>{title}</h1>
-    );
+const withHighlight = PassedComponent => {
+  return class extends Component {
+    state = {
+      auth: false
+    }
+    render() {
+      return (
+        <PassedComponent {...this.state} {...this.props}/>
+      )
+    }
   }
 }
 
-// Proptypes
-HelloWorld.propTypes = {
-  title: PropTypes.string.isRequired
-};
-
-// Default proptypes
-HelloWorld.defaultProps = {
-  title: "Hello"
-};
+export default withHighlight
